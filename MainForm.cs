@@ -43,7 +43,7 @@ namespace OcrHelper
             SendMessage(this.Handle, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0);
         }
 
-        public void StartOcr(bool auto = false)
+        public void StartOcr()
         {
             Image image = new Bitmap(panel_Image.Width, panel_Image.Height);
             Graphics graph = Graphics.FromImage(image);
@@ -55,15 +55,12 @@ namespace OcrHelper
             string result = "";
             foreach (var t in textBlocks)
                 result += t.Text + "\r\n";
-            this.BeginInvoke(new Action(() =>
-            {
-                richTextBox_Result.Text = result;
-            }));
+            this.BeginInvoke(() => { richTextBox_Result.Text = result;});
         }
 
         private void button_StartOcr_Click(object sender, EventArgs e)
         {
-            StartOcr(false);
+            StartOcr();
         }
     }
 }
